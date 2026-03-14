@@ -1,0 +1,85 @@
+    Checking Flash_Attention v0.1.0 (C:\Users\devsi\personal_projects\Flash_Attention)
+error[E0433]: failed to resolve: could not find `Maintain` in `wgpu`
+   --> src\main.rs:192:23
+    |
+192 |     device.poll(wgpu::Maintain::Wait);
+    |                       ^^^^^^^^ could not find `Maintain` in `wgpu`
+
+error[E0425]: cannot find function `thread_rng` in crate `rand`
+  --> src\main.rs:59:25
+   |
+59 |     let mut rng = rand::thread_rng();
+   |                         ^^^^^^^^^^ not found in `rand`
+
+warning: unused import: `rand::Rng`
+ --> src\main.rs:3:5
+  |
+3 | use rand::Rng;
+  |     ^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+error[E0063]: missing fields `experimental_features` and `trace` in initializer of `DeviceDescriptor<Option<&str>>`
+  --> src\main.rs:37:14
+   |
+37 |             &wgpu::DeviceDescriptor {
+   |              ^^^^^^^^^^^^^^^^^^^^^^ missing `experimental_features` and `trace`
+
+error[E0061]: this method takes 1 argument but 2 arguments were supplied
+  --> src\main.rs:36:10
+   |
+36 |         .request_device(
+   |          ^^^^^^^^^^^^^^
+...
+43 |             None,
+   |             ---- unexpected argument #2 of type `Option<_>`
+   |
+note: method defined here
+  --> C:\Users\devsi\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wgpu-28.0.0\src\api\adapter.rs:57:12
+   |
+57 |     pub fn request_device(
+   |            ^^^^^^^^^^^^^^
+help: remove the extra argument
+   |
+42 -             },
+43 -             None,
+42 +             },
+   |
+
+error[E0308]: mismatched types
+   --> src\main.rs:123:22
+    |
+123 |         entry_point: "main",
+    |                      ^^^^^^ expected `Option<&str>`, found `&str`
+    |
+    = note:   expected enum `Option<&str>`
+            found reference `&'static str`
+help: try wrapping the expression in `Some`
+    |
+123 |         entry_point: Some("main"),
+    |                      +++++      +
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `flume`
+   --> src\main.rs:186:30
+    |
+186 |     let (sender, receiver) = flume::bounded(1); // MPSC channel from standard library for sync safety
+    |                              ^^^^^ use of unresolved module or unlinked crate `flume`
+    |
+    = help: if you wanted to use a crate named `flume`, use `cargo add flume` to add it to your `Cargo.toml`
+
+error[E0282]: type annotations needed
+   --> src\main.rs:189:58
+    |
+189 |     buffer_slice.map_async(wgpu::MapMode::Read, move |v| sender.send(v).unwrap());
+    |                                                          ^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src\main.rs:195:25
+    |
+195 |     if let Ok(Ok(())) = receiver.recv() {
+    |                         ^^^^^^^^ cannot infer type
+
+Some errors have detailed explanations: E0061, E0063, E0282, E0308, E0425, E0433.
+For more information about an error, try `rustc --explain E0061`.
+warning: `Flash_Attention` (bin "Flash_Attention") generated 1 warning
+error: could not compile `Flash_Attention` (bin "Flash_Attention") due to 8 previous errors; 1 warning emitted
